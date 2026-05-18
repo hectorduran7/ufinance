@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursos | U-Finance</title>
+    
+    <link rel="icon" href="logo.png" type="image/png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], },
+                    colors: {
+                        base: 'var(--color-base)', surface: 'var(--color-surface)', border: 'var(--color-border)',
+                        textMain: 'var(--color-text)', textMuted: 'var(--color-muted)', accent: '#00ff88', accentHover: '#00cc6d'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --color-base: #f9fafb; --color-surface: #ffffff; --color-border: #e5e7eb;
+            --color-text: #111827; --color-muted: #6b7280; --glass-bg: 255, 255, 255;
+        }
+        html.dark {
+            --color-base: #080808; --color-surface: #121212; --color-border: #222222;
+            --color-text: #f5f5f5; --color-muted: #9ca3af; --glass-bg: 18, 18, 18;
+        }
+        body { background-color: var(--color-base); color: var(--color-text); overflow-x: hidden; transition: background-color 0.3s ease, color 0.3s ease; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--color-base); }
+        ::-webkit-scrollbar-thumb { background: #00ff88; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00cc6d; }
+        
+        .bg-grid {
+            background-size: 50px 50px;
+            background-image: linear-gradient(to right, rgba(150, 150, 150, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(150, 150, 150, 0.05) 1px, transparent 1px);
+            mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+        }
+        .glass-card {
+            background: rgba(var(--glass-bg), 0.7); backdrop-filter: blur(20px); border: 1px solid var(--color-border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover { border-color: rgba(0, 255, 136, 0.3); transform: translateY(-4px); box-shadow: 0 10px 40px -10px rgba(0, 255, 136, 0.1); }
+        #loader {
+            position: fixed; inset: 0; z-index: 9999; background-color: var(--color-base);
+            display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease;
+        }
+    </style>
+    <script>
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+</head>
+<body class="antialiased selection:bg-accent selection:text-base relative min-h-screen flex flex-col">
+
+    <div id="loader"><i data-lucide="hexagon" class="text-accent w-16 h-16 animate-pulse"></i></div>
+    <button id="theme-toggle" class="fixed bottom-6 right-6 z-[100] p-3 rounded-full glass-card hover:border-accent text-textMuted hover:text-accent transition-all shadow-lg group">
+        <i data-lucide="sun" id="theme-icon" class="w-5 h-5 group-hover:rotate-45 transition-transform duration-300"></i>
+    </button>
+
+    <div class="fixed inset-0 bg-grid pointer-events-none z-0"></div>
+
+    <nav class="fixed w-full z-50 glass-card border-x-0 border-t-0 rounded-none bg-opacity-80" data-aos="fade-down">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative z-10">
+            <a href="index.html" class="flex items-center gap-2 font-bold text-xl tracking-tight hover:opacity-80 transition-opacity text-textMain">
+                <img src="logo.png" alt="U-Finance" class="h-8 md:h-10 object-contain" onerror="this.outerHTML='<i data-lucide=\'hexagon\' class=\'text-accent w-6 h-6\'></i><span>U-Finance</span>'">
+            </a>
+            
+            <div class="hidden md:flex gap-8 text-sm font-medium text-textMuted">
+                <a href="index.html#metodologia" class="hover:text-textMain transition-colors">Metodología</a>
+                <a href="index.html#programas" class="hover:text-textMain transition-colors">Planes</a>
+                <a href="#" class="text-accent transition-colors">Recursos</a>
+                <a href="nosotros.html" class="hover:text-textMain transition-colors">La Firma</a>
+            </div>
+            <a href="index.html" class="hidden md:flex bg-accent hover:bg-accentHover text-base px-5 py-2.5 rounded-full text-sm font-bold transition-colors shadow-sm items-center gap-2">
+                <i data-lucide="arrow-left" class="w-4 h-4 text-base"></i> Volver al Inicio
+            </a>
+        </div>
+    </nav>
+
+    <header class="relative pt-40 pb-16 px-6 z-10 text-center" data-aos="zoom-in">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-textMain">
+            Recursos
+        </h1>
+        <p class="text-textMuted max-w-2xl mx-auto text-lg">
+            Herramientas operativas y material analítico enfocado en la estructura del mercado, gestión estricta del riesgo y psicología de inversión.
+        </p>
+    </header>
+
+    <main class="flex-grow z-10 px-6 pb-24 max-w-7xl mx-auto w-full">
+        <div class="grid md:grid-cols-2 gap-6 mb-12">
+            
+            <div class="glass-card p-6 rounded-2xl flex flex-col h-full bg-surface" data-aos="fade-up" data-aos-delay="0">
+                <div class="w-12 h-12 rounded-lg bg-base border border-border flex items-center justify-center mb-4 text-textMain">
+                    <i data-lucide="layers" class="w-6 h-6"></i>
+                </div>
+                <h3 class="font-bold text-lg text-textMain mb-2">El Método de los 3 Baldes</h3>
+                <p class="text-sm text-textMuted mb-6 flex-grow">Cómo ordenar tu plata y saber cuánto podés invertir sin culpa.</p>
+                <button class="w-full py-2.5 rounded-lg border border-border text-textMain hover:border-accent hover:text-accent transition-colors text-sm font-medium flex justify-center items-center gap-2">
+                    <i data-lucide="download" class="w-4 h-4"></i> Descargar Guía
+                </button>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl flex flex-col h-full bg-surface border-accent/20" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-12 h-12 rounded-lg bg-accent/10 border border-accent/30 flex items-center justify-center mb-4 text-accent">
+                    <i data-lucide="table" class="w-6 h-6"></i>
+                </div>
+                <h3 class="font-bold text-lg text-textMain mb-2">Tu Planilla de Control</h3>
+                <p class="text-sm text-textMuted mb-6 flex-grow">La guía fácil para usar el Wealth Tracker V1 y ver crecer tus ahorros.</p>
+                <button class="w-full py-2.5 rounded-lg bg-accent text-base hover:bg-accentHover transition-colors text-sm font-bold flex justify-center items-center gap-2">
+                    <i data-lucide="arrow-down-to-line" class="w-4 h-4"></i> Obtener Plantilla
+                </button>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl flex flex-col h-full bg-surface" data-aos="fade-up" data-aos-delay="200">
+                <div class="w-12 h-12 rounded-lg bg-base border border-border flex items-center justify-center mb-4 text-textMain">
+                    <i data-lucide="brain-circuit" class="w-6 h-6"></i>
+                </div>
+                <h3 class="font-bold text-lg text-textMain mb-2">Mente Fría</h3>
+                <p class="text-sm text-textMuted mb-6 flex-grow">Cómo ganarle a los sustos del mercado y dejar de perder plata por los nervios.</p>
+                <button class="w-full py-2.5 rounded-lg border border-border text-textMain hover:border-accent hover:text-accent transition-colors text-sm font-medium flex justify-center items-center gap-2">
+                    <i data-lucide="download" class="w-4 h-4"></i> Descargar PDF
+                </button>
+            </div>
+            
+            <div class="glass-card p-6 rounded-2xl flex flex-col h-full bg-surface" data-aos="fade-up" data-aos-delay="300">
+                <div class="w-12 h-12 rounded-lg bg-base border border-border flex items-center justify-center mb-4 text-textMain">
+                    <i data-lucide="book-open" class="w-6 h-6"></i>
+                </div>
+                <h3 class="font-bold text-lg text-textMain mb-2">El Traductor Financiero</h3>
+                <p class="text-sm text-textMuted mb-6 flex-grow">El glosario definitivo para entender las palabras difíciles del mercado.</p>
+                <button class="w-full py-2.5 rounded-lg border border-border text-textMain hover:border-accent hover:text-accent transition-colors text-sm font-medium flex justify-center items-center gap-2">
+                    <i data-lucide="download" class="w-4 h-4"></i> Descargar Glosario
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="border-t border-border bg-base py-8 px-6 relative z-10 mt-auto transition-colors">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-textMuted">
+            <p>&copy; 2026 U-Finance. Todos los derechos reservados.</p>
+            <div class="flex gap-4">
+                <a href="legales.html" class="hover:text-textMain transition-colors">Aviso Legal</a>
+                <a href="index.html" class="hover:text-textMain transition-colors">Volver al Inicio</a>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-6 pt-6 border-t border-border text-xs text-textMuted/60 leading-relaxed text-center md:text-left">
+            <p><strong>DISCLAIMER LEGAL & AVISO DE RIESGO:</strong> U-Finance es un espacio con fines estrictamente educativos e informativos. No somos asesores financieros, no gestionamos capital de terceros, ni captamos depósitos del público bajo ninguna circunstancia. Toda decisión u operativa corre bajo responsabilidad exclusiva del usuario.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        lucide.createIcons();
+        AOS.init({ once: true, offset: 50, duration: 800 });
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => { loader.style.opacity = '0'; setTimeout(() => loader.remove(), 500); }, 500);
+        });
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const updateIcon = (isDark) => { themeIcon.setAttribute('data-lucide', isDark ? 'sun' : 'moon'); lucide.createIcons(); };
+        updateIcon(document.documentElement.classList.contains('dark'));
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateIcon(isDark);
+        });
+    </script>
+</body>
+</html>

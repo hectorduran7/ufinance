@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U-Finance | Educación Financiera</title>
+    
+    <link rel="icon" href="logo.png" type="image/png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], },
+                    colors: {
+                        base: 'var(--color-base)',
+                        surface: 'var(--color-surface)',
+                        border: 'var(--color-border)',
+                        textMain: 'var(--color-text)',
+                        textMuted: 'var(--color-muted)',
+                        accent: '#00ff88',
+                        accentHover: '#00cc6d'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --color-base: #f9fafb; --color-surface: #ffffff; --color-border: #e5e7eb;
+            --color-text: #111827; --color-muted: #6b7280; --glass-bg: 255, 255, 255;
+        }
+        html.dark {
+            --color-base: #080808; --color-surface: #121212; --color-border: #222222;
+            --color-text: #f5f5f5; --color-muted: #9ca3af; --glass-bg: 18, 18, 18;
+        }
+        body { 
+            background-color: var(--color-base); color: var(--color-text); 
+            overflow-x: hidden; transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--color-base); }
+        ::-webkit-scrollbar-thumb { background: #00ff88; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00cc6d; }
+        
+        .bg-grid {
+            background-size: 50px 50px;
+            background-image: linear-gradient(to right, rgba(150, 150, 150, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(150, 150, 150, 0.05) 1px, transparent 1px);
+            mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+        }
+        .glass-card {
+            background: rgba(var(--glass-bg), 0.7); backdrop-filter: blur(20px); border: 1px solid var(--color-border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(0, 255, 136, 0.3); transform: translateY(-4px); box-shadow: 0 10px 40px -10px rgba(0, 255, 136, 0.1);
+        }
+        .text-glow { text-shadow: 0 0 40px rgba(0, 255, 136, 0.2); }
+        .gradient-text {
+            background: linear-gradient(135deg, var(--color-text) 0%, var(--color-muted) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero-glow { background: radial-gradient(circle, rgba(0,255,136,0.12) 0%, rgba(8,8,8,0) 60%); }
+        
+        #loader {
+            position: fixed; inset: 0; z-index: 9999; background-color: var(--color-base);
+            display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease;
+        }
+    </style>
+    <script>
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+</head>
+<body class="antialiased selection:bg-accent selection:text-base relative">
+
+    <div id="loader"><i data-lucide="hexagon" class="text-accent w-16 h-16 animate-pulse"></i></div>
+    <button id="theme-toggle" class="fixed bottom-6 right-6 z-[100] p-3 rounded-full glass-card hover:border-accent text-textMuted hover:text-accent transition-all shadow-lg group">
+        <i data-lucide="sun" id="theme-icon" class="w-5 h-5 group-hover:rotate-45 transition-transform duration-300"></i>
+    </button>
+
+    <div class="fixed inset-0 bg-grid pointer-events-none z-0"></div>
+
+    <nav class="fixed w-full z-50 glass-card border-x-0 border-t-0 rounded-none bg-opacity-80" data-aos="fade-down" data-aos-duration="800">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative z-10">
+            <a href="#" class="flex items-center gap-2 font-bold text-xl tracking-tight hover:opacity-80 transition-opacity text-textMain">
+                <img src="logo.png" alt="U-Finance" class="h-8 md:h-10 object-contain" onerror="this.outerHTML='<i data-lucide=\'hexagon\' class=\'text-accent w-6 h-6\'></i><span>U-Finance</span>'">
+            </a>
+            
+            <div class="hidden md:flex gap-8 text-sm font-medium text-textMuted">
+                <a href="#metodologia" class="hover:text-textMain transition-colors">Metodología</a>
+                <a href="#programas" class="hover:text-textMain transition-colors">Planes</a>
+                <a href="recursos.html" class="hover:text-textMain transition-colors">Recursos</a>
+                <a href="#faq" class="hover:text-textMain transition-colors">FAQ</a>
+                <a href="nosotros.html" class="hover:text-textMain transition-colors">La Firma</a>
+            </div>
+            <a href="#contacto" class="hidden md:flex bg-accent hover:bg-accentHover text-base px-5 py-2.5 rounded-full text-sm font-bold transition-colors shadow-sm items-center gap-2">
+                Contacto
+            </a>
+        </div>
+    </nav>
+
+    <header class="relative pt-48 pb-32 px-6 overflow-hidden flex flex-col items-center text-center">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] hero-glow rounded-full blur-[80px] pointer-events-none z-0"></div>
+        
+        <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center" data-aos="zoom-in" data-aos-duration="1000">
+            <h1 class="text-5xl md:text-[5.5rem] font-extrabold tracking-tight mb-8 leading-[1.05] text-glow gradient-text">
+                No leas el mercado. <br class="hidden md:block"/> Entendé su estructura.
+            </h1>
+            <p class="text-lg md:text-xl text-textMuted max-w-3xl mb-12 font-normal leading-relaxed" data-aos="fade-up" data-aos-delay="200">
+                Te enseñamos a mirar los mercados desde la lógica y el control de riesgo. Sin promesas mágicas, sin palabras difíciles: solo herramientas y explicaciones simples para que dejes de perder plata por culpa de los nervios.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto" data-aos="fade-up" data-aos-delay="400">
+                <a href="#programas" class="bg-accent hover:bg-accentHover text-base font-bold px-8 py-4 rounded-xl transition-all shadow-[0_0_25px_rgba(0,255,136,0.25)] flex items-center justify-center gap-2 group">
+                    Explorar Planes
+                    <i data-lucide="arrow-right" class="w-4 h-4 text-base group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <a href="recursos.html" class="bg-surface hover:bg-base border border-border text-textMain font-medium px-8 py-4 rounded-xl transition-all flex items-center justify-center gap-2 hover:shadow-lg">
+                    <i data-lucide="book-open" class="w-4 h-4 text-accent"></i>
+                    Ver Recursos Gratis
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section id="metodologia" class="py-24 px-6 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16 md:w-2/3" data-aos="fade-right">
+                <h2 class="text-3xl font-bold mb-4 text-textMain">Nuestra Metodología: <span class="text-accent">Confluencia</span></h2>
+                <p class="text-textMuted text-lg font-light">Un enfoque agnóstico y basado en datos. Evaluamos el entorno macroeconómico e identificamos la huella del capital institucional para ejecutar decisiones objetivas.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="glass-card p-10 rounded-2xl relative overflow-hidden group" data-aos="fade-up">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-3xl group-hover:bg-accent/10 transition-colors"></div>
+                    <div class="w-14 h-14 rounded-xl bg-surface border border-border flex items-center justify-center mb-6 text-accent relative z-10 shadow-lg">
+                        <i data-lucide="globe-2" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 relative z-10 text-textMain">Análisis Fundamental (FA)</h3>
+                    <p class="text-textMuted leading-relaxed relative z-10">
+                        Evaluación estricta del valor intrínseco. Estudiamos las políticas monetarias, métricas de salud financiera corporativa y el panorama macroeconómico global para establecer el sesgo direccional del capital a largo plazo.
+                    </p>
+                </div>
+                <div class="glass-card p-10 rounded-2xl relative overflow-hidden group" data-aos="fade-up" data-aos-delay="150">
+                    <div class="w-14 h-14 rounded-xl bg-surface border border-border flex items-center justify-center mb-6 text-textMain relative z-10 shadow-lg">
+                        <i data-lucide="bar-chart-3" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 relative z-10 text-textMain">Análisis Técnico (TA)</h3>
+                    <p class="text-textMuted leading-relaxed relative z-10">
+                        Dinámicas de liquidez institucional. Mapeamos zonas de oferta y demanda, ineficiencias en la acción del precio y estructuras de mercado para optimizar el ratio riesgo/beneficio en la ejecución operativa.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="programas" class="py-24 px-6 border-t border-border relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4 text-textMain">Nuestros Planes</h2>
+                <p class="text-textMuted">Soluciones estructuradas bajo un modelo de suscripción mensual.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="glass-card p-8 rounded-2xl flex flex-col h-full bg-surface" data-aos="fade-up" data-aos-delay="0">
+                    <div class="text-xs font-bold tracking-widest text-textMuted uppercase mb-2">Fase 01</div>
+                    <h3 class="text-2xl font-bold mb-2 text-textMain">Estructura Base</h3>
+                    <div class="text-accent text-sm font-medium mb-6 px-3 py-1 bg-accent/10 border border-accent/20 rounded-full inline-block w-max">Suscripción Mensual</div>
+                    <p class="text-textMuted mb-8 flex-grow">Comprende las bases de la macroeconomía, finanzas personales y el funcionamiento real de los mercados para una gestión sólida.</p>
+                    <ul class="space-y-3 mb-8 text-sm text-textMuted">
+                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-4 h-4 text-accent mt-0.5"></i> Gestión del riesgo básico</li>
+                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-4 h-4 text-accent mt-0.5"></i> Introducción al flujo de capital</li>
+                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-4 h-4 text-accent mt-0.5"></i> Creación de portafolios pasivos</li>
+                    </ul>
+                    <button class="w-full py-3 rounded-lg border border-border hover:bg-base text-textMain transition-colors font-medium text-sm">Ver Detalles</button>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl flex flex-col h-full border-accent/40 relative bg-surface transform md:-translate-y-4 shadow-[0_20px_40px_-15px_rgba(0,255,136,0.1)]" data-aos="fade-up" data-aos-delay="150">
+                    <div class="absolute top-0 right-8 -translate-y-1/2 bg-accent text-base text-xs font-bold px-3 py-1 rounded-full shadow-lg">Más Solicitado</div>
+                    <div class="text-xs font-bold tracking-widest text-accent uppercase mb-2">Fase 02</div>
+                    <h3 class="text-2xl font-bold mb-2 text-textMain">Gestión Activa</h3>
+                    <div class="text-accent text-sm font-medium mb-6 px-3 py-1 bg-accent/10 border border-accent/20 rounded-full inline-block w-max">Suscripción Mensual</div>
+                    <p class="text-textMuted mb-8 flex-grow">Acompañamiento continuo. Refinamiento algorítmico de lectura gráfica, gestión avanzada y mentalidad operativa.</p>
+                    <ul class="space-y-3 mb-8 text-sm text-textMuted">
+                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-4 h-4 text-accent mt-0.5"></i> Sesiones y seguimiento 1 a 1</li>
+                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-4 h-4 text-accent mt-0.5"></i> Psicotrading avanzado</li>
+                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-4 h-4 text-accent mt-0.5"></i> Modelos de entrada de alta precisión</li>
+                    </ul>
+                    <button class="w-full py-3 rounded-lg bg-textMain text-base hover:opacity-80 transition-opacity font-bold text-sm">Aplicar al Plan</button>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl flex flex-col h-full bg-surface" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-xs font-bold tracking-widest text-textMuted uppercase mb-2">Fase 03</div>
+                    <h3 class="text-2xl font-bold mb-2 text-textMain">Advisory Corporativo</h3>
+                    <div class="text-textMuted text-sm font-medium mb-6 px-3 py-1 bg-base border border-border rounded-full inline-block w-max">Retainer Mensual</div>
+                    <p class="text-textMuted mb-8 flex-grow">Servicio de Treasury Management. Optimizamos la liquidez inactiva para Pymes y estructuras corporativas.</p>
+                    <ul class="space-y-3 mb-8 text-sm text-textMuted">
+                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-4 h-4 text-accent mt-0.5"></i> Eficiencia del capital de trabajo</li>
+                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-4 h-4 text-accent mt-0.5"></i> Coberturas contra inflación/devaluación</li>
+                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-4 h-4 text-accent mt-0.5"></i> Reporting institucional periódico</li>
+                    </ul>
+                    <button class="w-full py-3 rounded-lg border border-border hover:bg-base text-textMain transition-colors font-medium text-sm">Agendar Llamada</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-24 px-6 relative z-10 border-t border-border">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4 text-textMain">Preguntas Frecuentes</h2>
+                <p class="text-textMuted">Claridad operativa y estructural sobre nuestros planes.</p>
+            </div>
+            <div class="space-y-4">
+                <details class="glass-card rounded-2xl group [&_summary::-webkit-details-marker]:hidden bg-surface" data-aos="fade-up" data-aos-delay="0">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer text-textMain font-semibold">
+                        <span>¿Necesito experiencia previa para la Estructura Base?</span>
+                        <span class="transition-transform duration-300 group-open:rotate-180 text-accent"><i data-lucide="chevron-down" class="w-5 h-5"></i></span>
+                    </summary>
+                    <div class="px-6 pb-6 text-textMuted text-sm leading-relaxed border-t border-border pt-4 mt-2">
+                        No. Está diseñado específicamente para estructurar los fundamentos desde cero. Abordamos la macroeconomía, la gestión del riesgo y la lectura de liquidez de manera progresiva.
+                    </div>
+                </details>
+                <details class="glass-card rounded-2xl group [&_summary::-webkit-details-marker]:hidden bg-surface" data-aos="fade-up" data-aos-delay="100">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer text-textMain font-semibold">
+                        <span>¿Cómo funciona el pago de los planes?</span>
+                        <span class="transition-transform duration-300 group-open:rotate-180 text-accent"><i data-lucide="chevron-down" class="w-5 h-5"></i></span>
+                    </summary>
+                    <div class="px-6 pb-6 text-textMuted text-sm leading-relaxed border-t border-border pt-4 mt-2">
+                        Nuestra arquitectura funciona mediante un modelo de suscripción mensual transparente. Esto asegura que recibas soporte constante, actualizaciones del mercado y acceso ininterrumpido a la infraestructura de la firma.
+                    </div>
+                </details>
+                <details class="glass-card rounded-2xl group [&_summary::-webkit-details-marker]:hidden bg-surface" data-aos="fade-up" data-aos-delay="200">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer text-textMain font-semibold">
+                        <span>¿U-Finance gestiona capital de terceros?</span>
+                        <span class="transition-transform duration-300 group-open:rotate-180 text-accent"><i data-lucide="chevron-down" class="w-5 h-5"></i></span>
+                    </summary>
+                    <div class="px-6 pb-6 text-textMuted text-sm leading-relaxed border-t border-border pt-4 mt-2">
+                        No somos un fondo de inversión ni captamos depósitos. Nuestro servicio de Advisory Corporativo es estrictamente de consultoría en Treasury Management, manteniendo el cliente el control total de sus fondos.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <section id="newsletter" class="py-24 px-6 relative z-10 border-t border-border">
+        <div class="max-w-4xl mx-auto glass-card rounded-3xl p-10 md:p-16 text-center relative overflow-hidden bg-surface" data-aos="zoom-in" data-aos-duration="1000">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_rgba(0,255,136,0.08)_0%,_transparent_70%)] pointer-events-none"></div>
+            
+            <div class="relative z-10">
+                <i data-lucide="inbox" class="w-12 h-12 mx-auto mb-6 text-accent drop-shadow-[0_0_15px_rgba(0,255,136,0.5)]"></i>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-textMain">Inteligencia financiera en tu bandeja de entrada.</h2>
+                <p class="text-textMuted text-lg mb-10 max-w-xl mx-auto">Únete a nuestra base de contactos corporativos y obtén acceso al <strong>Traductor Financiero</strong> y material exclusivo semanalmente.</p>
+                
+                <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                    <input type="email" placeholder="tu@correo.com" class="flex-grow bg-base border border-border rounded-xl px-5 py-4 focus:outline-none focus:border-accent/50 text-textMain placeholder-gray-500 transition-all shadow-inner" required>
+                    <button type="submit" class="bg-accent hover:bg-accentHover text-base font-bold px-8 py-4 rounded-xl transition-colors whitespace-nowrap shadow-lg shadow-accent/20">
+                        Suscribirse
+                    </button>
+                </form>
+                <p class="text-xs text-textMuted mt-5">Libre de spam. Análisis crudo y herramientas de gestión una vez por semana.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-border bg-base pt-16 pb-8 px-6 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-2 font-bold text-xl tracking-tight mb-4 text-textMain">
+                        <img src="logo.png" alt="U-Finance" class="h-6 object-contain opacity-80" onerror="this.outerHTML='<i data-lucide=\'hexagon\' class=\'text-accent w-6 h-6\'></i><span>U-Finance</span>'">
+                    </div>
+                    <p class="text-sm text-textMuted max-w-sm">
+                        Estructuración financiera, lectura de liquidez institucional y dominio psicológico. Transformando el análisis en decisiones objetivas y medibles.
+                    </p>
+                </div>
+                
+                <div>
+                    <h5 class="font-semibold mb-4 text-textMain">Ecosistema</h5>
+                    <ul class="space-y-3 text-sm text-textMuted">
+                        <li><a href="#programas" class="hover:text-accent transition-colors">Planes Mensuales</a></li>
+                        <li><a href="recursos.html" class="hover:text-accent transition-colors">Biblioteca de Recursos</a></li>
+                        <li><a href="nosotros.html" class="hover:text-accent transition-colors">Quiénes Somos</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h5 class="font-semibold mb-4 text-textMain">Legal & Contacto</h5>
+                    <ul class="space-y-3 text-sm text-textMuted">
+                        <li><a href="legales.html" class="hover:text-textMain transition-colors">Aviso Legal</a></li>
+                        <li><a href="#" class="hover:text-textMain transition-colors flex items-center gap-2"><i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn</a></li>
+                        <li><a href="#" class="hover:text-textMain transition-colors flex items-center gap-2"><i data-lucide="instagram" class="w-4 h-4"></i> Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-border pt-8 text-xs text-textMuted/60 leading-relaxed">
+                <p class="mb-4">
+                    <strong>DISCLAIMER LEGAL & AVISO DE RIESGO:</strong> U-Finance es un espacio con fines estrictamente educativos e informativos. No somos asesores financieros, no gestionamos capital de terceros, ni captamos depósitos del público bajo ninguna circunstancia. Toda decisión u operativa corre bajo responsabilidad exclusiva del usuario.
+                </p>
+                <div class="mt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p>&copy; 2026 U-Finance. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        lucide.createIcons();
+        AOS.init({ once: true, offset: 50, duration: 800 });
+
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => { loader.style.opacity = '0'; setTimeout(() => loader.remove(), 500); }, 500);
+        });
+
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const updateIcon = (isDark) => { themeIcon.setAttribute('data-lucide', isDark ? 'sun' : 'moon'); lucide.createIcons(); };
+        updateIcon(document.documentElement.classList.contains('dark'));
+        
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateIcon(isDark);
+        });
+    </script>
+</body>
+</html>
