@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviso Legal y Términos | U-Finance</title>
+    
+    <link rel="icon" href="logo.png" type="image/png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], },
+                    colors: {
+                        accent: '#00ff88', accentHover: '#00cc6d'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #00ff88; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00cc6d; }
+        
+        .bg-grid {
+            background-size: 50px 50px;
+            background-image: linear-gradient(to right, rgba(150, 150, 150, 0.08) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(150, 150, 150, 0.08) 1px, transparent 1px);
+            mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+        }
+        .glass-card { backdrop-filter: blur(20px); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    </style>
+    
+    <script>
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+</head>
+<body class="antialiased selection:bg-accent selection:text-black bg-gray-50 dark:bg-[#080808] transition-colors duration-300 relative min-h-screen flex flex-col">
+
+    <div id="loader" class="fixed inset-0 z-[9999] flex justify-center items-center bg-gray-50 dark:bg-[#080808] transition-opacity duration-500">
+        <i data-lucide="hexagon" class="text-accent w-16 h-16 animate-pulse"></i>
+    </div>
+    <button id="theme-toggle" class="fixed bottom-6 right-6 z-[100] p-3 rounded-full glass-card bg-white/80 dark:bg-[#121212]/80 border border-gray-200 dark:border-[#222] hover:border-accent text-gray-500 dark:text-gray-400 hover:text-accent dark:hover:text-accent transition-all shadow-lg group">
+        <i data-lucide="sun" id="theme-icon" class="w-5 h-5 group-hover:rotate-45 transition-transform duration-300"></i>
+    </button>
+
+    <div class="fixed inset-0 bg-grid pointer-events-none z-0"></div>
+
+    <nav class="fixed w-full z-50 glass-card bg-white/80 dark:bg-[#121212]/80 border-b border-gray-200 dark:border-[#222]" data-aos="fade-down">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative z-10">
+            <a href="index.html" class="flex items-center gap-2 font-bold text-xl tracking-tight hover:opacity-80 transition-opacity text-black dark:text-white">
+                <img src="logo.png" alt="U-Finance" class="h-8 md:h-10 object-contain" onerror="this.outerHTML='<i data-lucide=\'hexagon\' class=\'text-accent w-6 h-6\'></i><span>U-Finance</span>'">
+            </a>
+            
+            <div class="hidden md:flex gap-8 text-sm font-medium text-gray-600 dark:text-gray-300">
+                <a href="index.html#metodologia" class="hover:text-black dark:hover:text-white transition-colors">Metodología</a>
+                <a href="index.html#programas" class="hover:text-black dark:hover:text-white transition-colors">Planes</a>
+                <a href="recursos.html" class="hover:text-black dark:hover:text-white transition-colors">Recursos</a>
+                <a href="nosotros.html" class="hover:text-black dark:hover:text-white transition-colors">La Firma</a>
+            </div>
+            <a href="index.html" class="hidden md:flex bg-accent hover:bg-accentHover text-black px-5 py-2.5 rounded-full text-sm font-bold transition-colors shadow-sm items-center gap-2">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Volver al Inicio
+            </a>
+
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-600 dark:text-gray-300 hover:text-accent focus:outline-none">
+                <i data-lucide="menu" id="menu-icon" class="w-7 h-7"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden absolute w-full left-0 top-full bg-white dark:bg-[#121212] border-b border-gray-200 dark:border-[#222] shadow-xl">
+            <div class="flex flex-col px-6 py-6 gap-5 text-base font-medium text-gray-600 dark:text-gray-300">
+                <a href="index.html#metodologia" class="mobile-link hover:text-accent transition-colors">Metodología</a>
+                <a href="index.html#programas" class="mobile-link hover:text-accent transition-colors">Planes</a>
+                <a href="recursos.html" class="mobile-link hover:text-accent transition-colors">Recursos</a>
+                <a href="nosotros.html" class="mobile-link hover:text-accent transition-colors">La Firma</a>
+                <a href="index.html" class="mobile-link mt-2 w-full text-center bg-accent hover:bg-accentHover text-black px-5 py-3 rounded-xl font-bold transition-colors">Volver al Inicio</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative pt-40 pb-12 px-6 z-10 text-center" data-aos="zoom-in">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-bold uppercase tracking-wider mb-6">
+            Documentación Oficial
+        </div>
+        <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-black dark:text-white">
+            Aviso Legal y Términos
+        </h1>
+        <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg">
+            Transparencia y estructura de responsabilidad de los servicios de U-Finance.
+        </p>
+    </header>
+
+    <main class="flex-grow z-10 px-6 pb-24 max-w-4xl mx-auto w-full" data-aos="fade-up" data-aos-delay="100">
+        <div class="glass-card p-8 md:p-12 rounded-2xl bg-white/90 dark:bg-[#121212]/90 border border-gray-200 dark:border-[#222] shadow-sm text-sm md:text-base leading-relaxed space-y-8">
+            <section>
+                <h2 class="text-xl font-bold text-black dark:text-white mb-4 border-b border-gray-200 dark:border-[#333] pb-2">1. Naturaleza Educativa e Informativa</h2>
+                <p class="text-gray-700 dark:text-gray-300">
+                    U-Finance actúa exclusivamente como un espacio de consultoría estructural y educación financiera. Los contenidos, análisis, herramientas (incluyendo el Wealth Tracker) y metodologías expuestas en este sitio web y en nuestros programas de suscripción, tienen propósitos puramente didácticos e informativos. 
+                </p>
+                <p class="mt-2 text-gray-700 dark:text-gray-300">
+                    Bajo ninguna circunstancia la información proporcionada debe interpretarse como asesoramiento financiero personalizado, recomendación de compra o venta de activos, ni promesas de rentabilidad.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-black dark:text-white mb-4 border-b border-gray-200 dark:border-[#333] pb-2">2. Regulación y Captación de Fondos</h2>
+                <p class="text-gray-700 dark:text-gray-300">
+                    U-Finance <strong>NO es un Agente de Liquidación y Compensación (ALyC)</strong>, ni un broker, ni un fondo común de inversión. No nos encontramos bajo la supervisión de la Comisión Nacional de Valores (CNV) ni de entidades equivalentes en otras jurisdicciones para la intermediación de valores negociables.
+                </p>
+                <p class="mt-2 text-accent font-medium">
+                    U-Finance no capta depósitos del público, no gestiona ni custodia capital de terceros, ni realiza operaciones en los mercados a nombre de sus clientes.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-black dark:text-white mb-4 border-b border-gray-200 dark:border-[#333] pb-2">3. Riesgo de Mercado y Responsabilidad</h2>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Operar en mercados de renta variable, índices, materias primas y criptoactivos conlleva un riesgo extremo y puede resultar en la pérdida parcial o total del capital invertido. El análisis de la estructura de liquidez y el uso de gestores de riesgo estadísticos no eliminan la incertidumbre inherente de los mercados.
+                </p>
+                <p class="mt-2 text-gray-700 dark:text-gray-300">
+                    El usuario reconoce y acepta que U-Finance, sus fundadores y sus colaboradores no son responsables de ninguna pérdida económica, daño directo o indirecto que pudiera derivarse del uso de la información, conceptos o herramientas facilitadas. Cada persona o empresa asume responsabilidad plena y exclusiva de sus propias decisiones.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-black dark:text-white mb-4 border-b border-gray-200 dark:border-[#333] pb-2">4. Planes de Suscripción y Reembolsos</h2>
+                <p class="text-gray-700 dark:text-gray-300">
+                    El acceso a nuestros Planes (Estructura Base, Gestión Activa, Advisory Corporativo) se rige mediante un modelo de suscripción mensual o pago por servicios estructurados. Al tratarse de conocimiento, mentorías en vivo y herramientas digitales de acceso inmediato (intangibles), no se aplican políticas de reembolso una vez que el usuario ha accedido al material o consumido las horas de consultoría. El cliente es libre de cancelar su suscripción en cualquier momento para evitar próximos cobros.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-black dark:text-white mb-4 border-b border-gray-200 dark:border-[#333] pb-2">5. Privacidad y Newsletter</h2>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Los correos electrónicos proporcionados para acceder a nuestros recursos gratuitos serán utilizados exclusivamente para enviar material educativo y actualizaciones de la firma. No comercializamos bases de datos con terceros. Puedes darte de baja de nuestra lista en cualquier momento usando el enlace al final de nuestros correos.
+                </p>
+            </section>
+
+            <p class="text-xs mt-8 pt-4 border-t border-gray-200 dark:border-[#333] text-gray-500 dark:text-gray-400">Última actualización: Mayo 2026</p>
+        </div>
+    </main>
+
+    <footer class="border-t border-gray-200 dark:border-[#222] bg-gray-100 dark:bg-[#050505] pt-16 pb-8 px-6 relative z-10 mt-auto transition-colors duration-300">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-2 font-bold text-xl tracking-tight mb-4 text-black dark:text-white">
+                        <img src="logo.png" alt="U-Finance" class="h-6 object-contain opacity-80" onerror="this.outerHTML='<i data-lucide=\'hexagon\' class=\'text-accent w-6 h-6\'></i><span>U-Finance</span>'">
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 max-w-sm">
+                        Estructuración financiera, lectura de liquidez institucional y dominio psicológico. Transformando el análisis en decisiones objetivas y medibles.
+                    </p>
+                </div>
+                
+                <div>
+                    <h5 class="font-semibold mb-4 text-black dark:text-white">Ecosistema</h5>
+                    <ul class="space-y-3 text-sm text-gray-600 dark:text-gray-400">
+                        <li><a href="index.html#programas" class="hover:text-accent transition-colors">Planes Mensuales</a></li>
+                        <li><a href="recursos.html" class="hover:text-accent transition-colors">Biblioteca de Recursos</a></li>
+                        <li><a href="nosotros.html" class="hover:text-accent transition-colors">Quiénes Somos</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h5 class="font-semibold mb-4 text-black dark:text-white">Legal & Contacto</h5>
+                    <ul class="space-y-3 text-sm text-gray-600 dark:text-gray-400">
+                        <li><a href="#" class="text-accent transition-colors">Aviso Legal</a></li>
+                        <li><a href="#" class="hover:text-black dark:hover:text-white transition-colors flex items-center gap-2"><i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn</a></li>
+                        <li><a href="#" class="hover:text-black dark:hover:text-white transition-colors flex items-center gap-2"><i data-lucide="instagram" class="w-4 h-4"></i> Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-300 dark:border-[#222] pt-8 text-xs text-gray-500 dark:text-gray-500 leading-relaxed">
+                <p class="mb-4">
+                    <strong>DISCLAIMER LEGAL & AVISO DE RIESGO:</strong> U-Finance es un espacio con fines estrictamente educativos e informativos. No somos asesores financieros, no gestionamos capital de terceros, ni captamos depósitos del público bajo ninguna circunstancia. Toda decisión u operativa corre bajo responsabilidad exclusiva del usuario.
+                </p>
+                <div class="mt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p>&copy; 2026 U-Finance. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        lucide.createIcons();
+        AOS.init({ once: true, offset: 50, duration: 800 });
+        
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => { loader.style.opacity = '0'; setTimeout(() => loader.remove(), 500); }, 500);
+        });
+        
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const updateIcon = (isDark) => { themeIcon.setAttribute('data-lucide', isDark ? 'sun' : 'moon'); lucide.createIcons(); };
+        updateIcon(document.documentElement.classList.contains('dark'));
+        
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateIcon(isDark);
+        });
+
+        // LÓGICA DEL MENÚ MÓVIL
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        if(mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                if(mobileMenu.classList.contains('hidden')) {
+                    menuIcon.setAttribute('data-lucide', 'menu');
+                } else {
+                    menuIcon.setAttribute('data-lucide', 'x');
+                }
+                lucide.createIcons(); 
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.setAttribute('data-lucide', 'menu');
+                    lucide.createIcons();
+                });
+            });
+        }
+    </script>
+</body>
+</html>
